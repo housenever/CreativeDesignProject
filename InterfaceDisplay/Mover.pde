@@ -18,8 +18,9 @@ class Mover {
   //1.Constructor 
   //---------------------------
 
-  Mover () {
+  Mover (int colorPattern) {
     setRandomValues();
+    setRandomColor(colorPattern);
   }
 
 
@@ -40,17 +41,104 @@ class Mover {
     noiseScale = 80;
     noiseStrength = 1;
     forceStrength = random (0.1, 0.2);
-
-    setRandomColor();
   }
 
-  void setRandomColor () {
+  //Set the color pattern
+
+  void setRandomColor (int colorPattern) {
+
     int colorDice = (int) random (4);
 
-    if (colorDice == 0) c = #ffedbc;
-    else if (colorDice == 1) c = #A75265;
-    else if (colorDice == 2) c = #ec7263;
-    else c = #febe7e;
+    if (colorPattern == 0) {
+      if (colorDice == 0) c = #ffedbc;
+      else if (colorDice == 1) c = #A75265;
+      else if (colorDice == 2) c = #ec7263;
+      else c = #febe7e;
+    }
+    //Sweet
+    else if (colorPattern == 1) {
+      if (colorDice == 0) c = #00FFF4;
+      else if (colorDice == 1) c = #FFF600;
+      else if (colorDice == 2) c = #5100FF;
+      else c = #FFAAD6;
+    }
+    //Oil and Fat
+    else if (colorPattern == 2) {
+      if (colorDice == 0) c = #FFC300;
+      else if (colorDice == 1) c = #FEFFA2;
+      else if (colorDice == 2) c = #FF9124;
+      else c = #FF5A44;
+    }
+    //Anxious
+    else if (colorPattern == 3) {
+      if (colorDice == 0) c = #FF3C86;
+      else if (colorDice == 1) c = #FFA400;
+      else if (colorDice == 2) c = #FF6F00;
+      else c = #1C00FF;
+    }
+    //Disorder
+    else if (colorPattern == 4) {
+      if (colorDice == 0) c = #6DFFD0;
+      else if (colorDice == 1) c = #0036FF;
+      else if (colorDice == 2) c = #000000;
+      else c = #FFFF00;
+    }
+    //Scary
+    else if (colorPattern == 5) {
+      if (colorDice == 0) c = #586298;
+      else if (colorDice == 1) c = #44248E;
+      else if (colorDice == 2) c = #E32272;
+      else c = #006774;
+    }
+    //Bloody
+    else if (colorPattern == 6) {
+      if (colorDice == 0) c = #FF0000;
+      else if (colorDice == 1) c = #FF4863;
+      else if (colorDice == 2) c = #CC0937;
+      else c = #9E0000;
+    }
+    //Bareen and sad
+    else if (colorPattern == 7) {
+      if (colorDice == 0) c = #786F2E;
+      else if (colorDice == 1) c = #894A00;
+      else if (colorDice == 2) c = #EDE8A9;
+      else c = #CBCBCB;
+    }
+    //Calm
+    else if (colorPattern == 8) {
+      if (colorDice == 0) c = #5D8CED;
+      else if (colorDice == 1) c = #12A7D7;
+      else if (colorDice == 2) c = #B7DDF0;
+      else c = #00044C;
+    }
+    //Over Nutrition
+    else if (colorPattern == 9) {
+      if (colorDice == 0) c = #223FDB;
+      else if (colorDice == 1) c = #307239;
+      else if (colorDice == 2) c = #00F2FF;
+      else c = #7C213F;
+    }
+    //Waste and dirty
+    else if (colorPattern == 10) {
+      if (colorDice == 0) c = #96A971;
+      else if (colorDice == 1) c = #BFA47D;
+      else if (colorDice == 2) c = #956AA0;
+      else c = #000000;
+    }
+    //Pollution
+    else if (colorPattern == 11) {
+      if (colorDice == 0) c = #667880;
+      else if (colorDice == 1) c = #666666;
+      else if (colorDice == 2) c = #828282;
+      else c = #000000;
+    }
+    //Pesticide
+    else if (colorPattern == 12) {
+      if (colorDice == 0) c = #52AF56;
+      else if (colorDice == 1) c = #B6E349;
+      else if (colorDice == 2) c = #BABBFF;
+      else c = #B050C5;
+    }
   }
 
 
@@ -283,15 +371,13 @@ class Mover {
 
     if (location.x < mouseX-range-radius ) {
       seek(mouseX, mouseY);
-    } 
-    else if (location.x > mouseX+range-radius ) {
+    } else if (location.x > mouseX+range-radius ) {
       seek(mouseX, mouseY);
     }
 
     if (location.y < mouseY-range-radius ) {
       seek(mouseX, mouseY);
-    } 
-    else if (location.y > mouseY+range-radius ) {
+    } else if (location.y > mouseY+range-radius ) {
       seek(mouseX, mouseY);
     }
   }
