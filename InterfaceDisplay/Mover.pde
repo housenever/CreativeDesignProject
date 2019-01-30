@@ -11,6 +11,8 @@ class Mover {
   float forceStrength;
 
   float ellipseSize;
+  
+  float dispersionMultiplier;
 
   color c;
 
@@ -19,7 +21,7 @@ class Mover {
   //---------------------------
 
   Mover (int colorPattern) {
-    setRandomValues();
+    setRandomValues(4,15,5,10,1.2);
     setRandomColor(colorPattern);
   }
 
@@ -29,18 +31,20 @@ class Mover {
   //2.Set the defult value
   //---------------------------
 
-  void setRandomValues () {
+  void setRandomValues (int sizeMin, int sizeMax, float speedMin, float speedMax, float dispersion) {
     location = new PVector (random (width), random (height));
-    ellipseSize = random (4, 15);
+    ellipseSize = random (sizeMin, sizeMax);
 
     float angle = random (TWO_PI);
     direction = new PVector (cos (angle), sin (angle));
 
-    speed = random (5, 10);
+    speed = random (speedMin, speedMax);
     SPEED = speed;
     noiseScale = 80;
     noiseStrength = 1;
     forceStrength = random (0.1, 0.2);
+    
+    dispersionMultiplier = dispersion;
   }
 
   //Set the color pattern
@@ -181,7 +185,7 @@ class Mover {
         alignCount++;
       }
 
-      if (distance > 0 && distance < (ellipseSize+otherSize)*1.2) { 
+      if (distance > 0 && distance < (ellipseSize+otherSize)*dispersionMultiplier) { 
 
         float angle = atan2 (location.y-other.y, location.x-other.x);
 
@@ -393,4 +397,5 @@ class Mover {
     fill (c);
     ellipse (location.x, location.y, ellipseSize, ellipseSize);
   }
+  
 }

@@ -5,6 +5,11 @@ color backgroundColor;
 //Change the Color Pattern from 0 to 12.
 int colorPattern = 1;
 
+int mode;
+
+//0 = normal
+//1 = fat
+//2 = crippled
 
 
 void setup () {
@@ -12,6 +17,7 @@ void setup () {
   smooth();
 
   bouncers = new ArrayList();
+  mode = 0;
 
   //Initial the instance from Mover class
   for (int i = 0; i < moverNumvber; i++) {
@@ -38,7 +44,6 @@ void draw () {
   int i = 0;
   while (i < bouncers.size () ) {
     Mover m = bouncers.get(i);
-
     m.flock (bouncers);
     m.move();
     m.checkEdgesInArea ();
@@ -96,3 +101,24 @@ void setGradientArea(int x, int y, float w, float h, color c1, color c2, int alp
     line(i, y, i, y+h);
   }
 }
+
+void keyTyped() 
+  {
+    for(int i=0; i<bouncers.size(); i++)
+    {
+      if (key == 'f') //Fat and slow.
+      {
+        bouncers.get(i).setRandomValues(20,30,2,3,0.5);
+      }
+      else if (key == 'c')
+      {
+         print(key);
+         mode = 2;
+      }
+      else if (key=='n') //Normal behaviour
+      {
+        bouncers.get(i).setRandomValues(4,15,5,10,1.2);
+      }
+    }
+    
+  }
