@@ -1,3 +1,5 @@
+import java.util.Random;
+
 ArrayList <Mover> bouncers;
 int moverNumvber = 200;
 color backgroundColor;
@@ -6,6 +8,8 @@ color backgroundColor;
 int colorPattern = 1;
 
 int mode;
+
+Random rand;
 
 //0 = normal
 //1 = fat
@@ -24,6 +28,8 @@ void setup () {
     Mover m = new Mover(colorPattern);
     bouncers.add (m);
   }
+  
+  rand = new Random();
 
   background (backgroundColor(colorPattern));
   //setGradientArea(0, 0, width, height, #FD518E, #F7841C, 100);
@@ -40,16 +46,40 @@ void draw () {
   noStroke();
   rect (0, 0, width, height);
 
-
   int i = 0;
+
   while (i < bouncers.size () ) {
-    Mover m = bouncers.get(i);
-    m.flock (bouncers);
-    m.move();
-    m.checkEdgesInArea ();
-    m.display();
-    i = i + 1;
-  }
+      if (mode == 0) //normal moving pattern
+      {
+        Mover m = bouncers.get(i);
+        m.flock (bouncers);
+        m.move();
+        m.checkEdgesInArea ();
+        m.display();
+      }
+      else if (mode == 1) //scared blobs
+      {
+        Mover m = bouncers.get(i);
+        //m.flock (bouncers);
+        m.move();
+        //m.checkEdgesInArea ();
+        m.display();
+      }
+      else if (mode == 2) //crippled blobs
+      {
+        int r = rand.nextInt(10000);
+        Mover m = bouncers.get(i);
+        m.flock (bouncers);
+        if (r%3 == 0)
+        {
+
+          m.move();
+          m.checkEdgesInArea ();
+          m.display();
+        }
+      }
+      i = i + 1;
+    }
 }
 
 
@@ -108,20 +138,28 @@ void keyTyped()
     {
       if (key == 'f') //Fat and slow.
       {
+        mode = 0;
         bouncers.get(i).setRandomValues(20,30,2,3,0.5);
       }
       else if (key == 's') //Scared
       {
-         //bouncers.get(i).setRandomValues(4,15,15,20,1.2);
+        mode = 1; 
+        bouncers.get(i).setRandomValues(4,15,15,20,1.2);
+
          
       }
       else if (key == 'c') //Confused
       {
-          
       }
-      else if (key=='n') //Normal behaviour
+      else if (key == 'n') //Normal behaviour
       {
+        mode = 0;
         bouncers.get(i).setRandomValues(4,15,5,10,1.2);
+      }
+      if (key == 'h') //hurt
+      {
+         mode = 2;
+         bouncers.get(i).setRandomValues(4,15,2,3,1.2);
       }
     }
     
