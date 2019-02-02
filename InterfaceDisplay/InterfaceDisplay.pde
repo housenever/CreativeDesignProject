@@ -110,10 +110,14 @@ void keyTyped()
       {
         bouncers.get(i).setRandomValues(20,30,2,3,0.5);
       }
-      else if (key == 'c')
+      else if (key == 's') //Scared
       {
-         print(key);
-         mode = 2;
+         //bouncers.get(i).setRandomValues(4,15,15,20,1.2);
+         
+      }
+      else if (key == 'c') //Confused
+      {
+          
       }
       else if (key=='n') //Normal behaviour
       {
