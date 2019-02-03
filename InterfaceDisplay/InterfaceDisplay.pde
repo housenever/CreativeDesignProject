@@ -78,6 +78,14 @@ void draw () {
           m.display();
         }
       }
+      if (mode == 3) //normal moving pattern
+      {
+        Mover m = bouncers.get(i);
+        //m.flock (bouncers);
+        m.move();
+        m.confusion ();
+        m.display();
+      }
       i = i + 1;
     }
 }
@@ -150,6 +158,8 @@ void keyTyped()
       }
       else if (key == 'c') //Confused
       {
+        mode = 3;
+        bouncers.get(i).setRandomValues(4,15,2,20,1.2);
       }
       else if (key == 'n') //Normal behaviour
       {

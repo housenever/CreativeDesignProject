@@ -388,6 +388,23 @@ class Mover {
 
 
 
+  void confusion () {
+    float radius = ellipseSize / 2;
+    float range = 150+random(-30, 30);
+
+    if (location.x < mouseX-range-radius ) {
+      seek(random (width), random (height));
+    } else if (location.x > mouseX+range-radius ) {
+      seek(random (width), random (height));
+    }
+
+    if (location.y < mouseY-range-radius ) {
+      seek(random (width), random (height));
+    } else if (location.y > mouseY+range-radius ) {
+      seek(random (width), random (height));
+    }
+  }
+
   //---------------------------
   //5.Display the objects(movers)
   //---------------------------
