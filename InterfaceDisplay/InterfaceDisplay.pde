@@ -94,6 +94,15 @@ void draw () {
         m.checkEdgesInArea ();
         if (i == 1) m.display();
       }
+      if (mode == 5) //No water.
+      {
+        int r = rand.nextInt(10000);
+        Mover m = bouncers.get(i);
+        //m.flock (bouncers);
+        //m.move();
+        //m.checkEdgesInArea ();
+        if (r % 4 != 0) m.display();
+      }
       i = i + 1;
     }
 }
@@ -206,6 +215,14 @@ void keyTyped()
         mode = 4;
         bouncers.get(i).setRandomValues(4,4,4,5,1.2);
         colorPattern = 10;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
+      }
+      else if (key == 'w') //no water
+      {
+         mode = 5; 
+        bouncers.get(i).setRandomValues(4,15,4,5,1.2);
+        colorPattern = 11;
         bouncers.get(i).setRandomColor(colorPattern);
         background(backgroundColor(colorPattern));
       }
