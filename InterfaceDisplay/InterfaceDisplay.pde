@@ -148,28 +148,50 @@ void keyTyped()
       {
         mode = 0;
         bouncers.get(i).setRandomValues(20,30,2,3,0.5);
+                colorPattern = 2;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
       }
       else if (key == 's') //Scared
       {
         mode = 1; 
         bouncers.get(i).setRandomValues(4,15,15,20,1.2);
-
+                colorPattern = 5;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
          
       }
       else if (key == 'c') //Confused
       {
         mode = 3;
-        bouncers.get(i).setRandomValues(4,15,2,20,1.2);
+        bouncers.get(i).setRandomValues(4,15,2,15,1.2);
+                colorPattern = 3;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
       }
       else if (key == 'n') //Normal behaviour
       {
         mode = 0;
         bouncers.get(i).setRandomValues(4,15,5,10,1.2);
+                colorPattern = 1;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
       }
-      if (key == 'h') //hurt
+      else if (key == 'h') //Hurt
       {
          mode = 2;
          bouncers.get(i).setRandomValues(4,15,2,3,1.2);
+                 colorPattern = 6;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
+      }
+      else if (key == 'd') //Sad blobbos. :(
+      {
+        mode = 0;
+        bouncers.get(i).setRandomValues(4,15,2,3,1.2);
+        colorPattern = 7;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
       }
     }
     
