@@ -70,7 +70,7 @@ void draw () {
         int r = rand.nextInt(10000);
         Mover m = bouncers.get(i);
         m.flock (bouncers);
-        if (r%3 == 0)
+        if (r%5 == 0)
         {
 
           m.move();
@@ -78,13 +78,21 @@ void draw () {
           m.display();
         }
       }
-      if (mode == 3) //normal moving pattern
+      if (mode == 3) //confused blobs
       {
         Mover m = bouncers.get(i);
         //m.flock (bouncers);
         m.move();
         m.confusion ();
         m.display();
+      }
+      if (mode == 4) //lonely blob.
+      {
+        Mover m = bouncers.get(i);
+        m.flock (bouncers);
+        m.move();
+        m.checkEdgesInArea ();
+        if (i == 1) m.display();
       }
       i = i + 1;
     }
@@ -152,7 +160,7 @@ void keyTyped()
         bouncers.get(i).setRandomColor(colorPattern);
         background(backgroundColor(colorPattern));
       }
-      else if (key == 's') //Scared
+      else if (key == 's') //Scared blobbos
       {
         mode = 1; 
         bouncers.get(i).setRandomValues(4,15,15,20,1.2);
@@ -161,7 +169,7 @@ void keyTyped()
         background(backgroundColor(colorPattern));
          
       }
-      else if (key == 'c') //Confused
+      else if (key == 'c') //Confused or anxious
       {
         mode = 3;
         bouncers.get(i).setRandomValues(4,15,2,15,1.2);
@@ -177,11 +185,11 @@ void keyTyped()
         bouncers.get(i).setRandomColor(colorPattern);
         background(backgroundColor(colorPattern));
       }
-      else if (key == 'h') //Hurt
+      else if (key == 'p') //Swimming in pesticide
       {
          mode = 2;
          bouncers.get(i).setRandomValues(4,15,2,3,1.2);
-                 colorPattern = 6;
+                 colorPattern = 12;
         bouncers.get(i).setRandomColor(colorPattern);
         background(backgroundColor(colorPattern));
       }
@@ -190,6 +198,14 @@ void keyTyped()
         mode = 0;
         bouncers.get(i).setRandomValues(4,15,2,3,1.2);
         colorPattern = 7;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
+      }
+      else if (key == 'l') //poor and lonesome blob
+      {
+        mode = 4;
+        bouncers.get(i).setRandomValues(4,4,4,5,1.2);
+        colorPattern = 10;
         bouncers.get(i).setRandomColor(colorPattern);
         background(backgroundColor(colorPattern));
       }
