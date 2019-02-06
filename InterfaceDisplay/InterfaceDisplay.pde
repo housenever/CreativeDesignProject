@@ -23,16 +23,19 @@ void setup () {
 
   bouncers = new ArrayList();
   mode = 0;
+  
+  vt = new VirtualTangible(400,400,"./testIMG.png");
 
   //Initial the instance from Mover class
   for (int i = 0; i < moverNumvber; i++) {
     Mover m = new Mover(colorPattern);
+    m.setVirtualTangible(vt);
     bouncers.add (m);
   }
   
   rand = new Random();
   
-  vt = new VirtualTangible(400,400,"./testIMG.png");
+  
 
   background (backgroundColor(colorPattern));
   //setGradientArea(0, 0, width, height, #FD518E, #F7841C, 100);
@@ -60,7 +63,7 @@ void draw () {
         Mover m = bouncers.get(i);
         m.flock (bouncers);
         m.move();
-        m.checkEdgesInArea ();
+        m.checkEdgesInAreaToTangible ();
         m.display();
       }
       else if (mode == 1) //scared blobs
@@ -80,7 +83,7 @@ void draw () {
         {
 
           m.move();
-          m.checkEdgesInArea ();
+          m.checkEdgesInAreaToTangible ();
           m.display();
         }
       }
@@ -97,7 +100,7 @@ void draw () {
         Mover m = bouncers.get(i);
         m.flock (bouncers);
         m.move();
-        m.checkEdgesInArea ();
+        m.checkEdgesInAreaToTangible ();
         if (i == 1) m.display();
       }
       if (mode == 5) //No water.
@@ -161,6 +164,78 @@ void setGradientArea(int x, int y, float w, float h, color c1, color c2, int alp
     stroke(c, alpha);
     line(i, y, i, y+h);
   }
+}
+
+void switchMode(int arg) //USE THIS TO SWAP MODE FOLLOWING DETECTION
+{
+  for(int i=0; i<bouncers.size(); i++)
+    {
+      if (arg == 1) //Fat and slow -- BURGER
+      {
+        mode = 0;
+        bouncers.get(i).setRandomValues(20,30,2,3,0.5);
+                colorPattern = 2;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
+      }
+      else if (arg == 2) //Scared blobbos -- MEAT
+      {
+        mode = 1; 
+        bouncers.get(i).setRandomValues(4,15,15,20,1.2);
+                colorPattern = 5;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
+         
+      }
+      else if (arg == 3) //Confused or anxious
+      {
+        mode = 3;
+        bouncers.get(i).setRandomValues(4,15,2,15,1.2);
+                colorPattern = 3;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
+      }
+      else if (arg == 0) //Normal behaviour
+      {
+        mode = 0;
+        bouncers.get(i).setRandomValues(4,15,5,10,1.2);
+                colorPattern = 1;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
+      }
+      else if (arg == 4) //Swimming in pesticide -- RICE
+      {
+         mode = 2;
+         bouncers.get(i).setRandomValues(4,15,2,3,1.2);
+                 colorPattern = 12;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
+      }
+      else if (arg == 5) //Sad blobbos. :(
+      {
+        mode = 0;
+        bouncers.get(i).setRandomValues(4,15,2,3,1.2);
+        colorPattern = 7;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
+      }
+      else if (arg == 6) //poor and lonesome blob -- FISH
+      {
+        mode = 4;
+        bouncers.get(i).setRandomValues(4,4,4,5,1.2);
+        colorPattern = 10;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
+      }
+      else if (arg == 7) //no water -- CORN
+      {
+         mode = 5; 
+        bouncers.get(i).setRandomValues(4,15,4,5,1.2);
+        colorPattern = 11;
+        bouncers.get(i).setRandomColor(colorPattern);
+        background(backgroundColor(colorPattern));
+      }
+    }
 }
 
 void keyTyped() 
