@@ -15,6 +15,8 @@ class Mover {
   float dispersionMultiplier;
 
   color c;
+  
+  VirtualTangible vt;
 
   //---------------------------
   //1.Constructor 
@@ -25,7 +27,10 @@ class Mover {
     setRandomColor(colorPattern);
   }
 
-
+  void setVirtualTangible(VirtualTangible vt)
+  {
+    this.vt = vt;
+  }
 
   //---------------------------
   //2.Set the defult value
@@ -387,7 +392,7 @@ class Mover {
   }
 
 
-
+// Confused reposition
   void confusion () {
     float radius = ellipseSize / 2;
     float range = 150+random(-30, 30);
@@ -402,6 +407,25 @@ class Mover {
       seek(random (width), random (height));
     } else if (location.y > mouseY+range-radius ) {
       seek(random (width), random (height));
+    }
+  }
+
+
+//reposition to tangible location
+  void checkEdgesInAreaToTangible () {
+    float radius = ellipseSize / 2;
+    float range = 150+random(-30, 30);
+
+    if (location.x < vt.x-range-radius ) {
+      seek(vt.x, vt.y);
+    } else if (location.x > vt.x+range-radius ) {
+      seek(vt.x, vt.y);
+    }
+
+    if (location.y < vt.y-range-radius ) {
+      seek(vt.x, vt.y);
+    } else if (location.y > vt.y+range-radius ) {
+      seek(vt.x, vt.y);
     }
   }
 

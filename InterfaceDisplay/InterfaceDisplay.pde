@@ -3,6 +3,7 @@ import java.util.Random;
 ArrayList <Mover> bouncers;
 int moverNumvber = 200;
 color backgroundColor;
+VirtualTangible vt;
 
 //Change the Color Pattern from 0 to 12.
 int colorPattern = 1;
@@ -30,6 +31,8 @@ void setup () {
   }
   
   rand = new Random();
+  
+  vt = new VirtualTangible(400,400,"./testIMG.png");
 
   background (backgroundColor(colorPattern));
   //setGradientArea(0, 0, width, height, #FD518E, #F7841C, 100);
@@ -47,6 +50,9 @@ void draw () {
   rect (0, 0, width, height);
 
   int i = 0;
+  
+  vt.display();
+  vt.mouseDragged();
 
   while (i < bouncers.size () ) {
       if (mode == 0) //normal moving pattern
@@ -229,3 +235,11 @@ void keyTyped()
     }
     
   }
+  
+  void mousePressed() {
+  vt.draggingpicMousePressed();
+}
+ 
+void mouseReleased() {
+  vt.draggingpicMouseReleased();
+}
