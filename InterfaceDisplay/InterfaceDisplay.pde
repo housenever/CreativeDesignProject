@@ -1,4 +1,6 @@
 import java.util.Random;
+import oscP5.*;
+import netP5.*;
 
 ArrayList <Mover> bouncers;
 int moverNumvber = 200;
@@ -10,6 +12,45 @@ int colorPattern = 1;
 
 int mode;
 
+
+  
+OscP5 osc;
+NetAddress receiver;
+
+void oscEvent( OscMessage m ) {
+  //print( "Received an osc message" );
+  //print( ", address pattern: " + m.getAddress( ) );
+  //print( ", typetag: " + m.getTypetag( ) );
+  //if(m.getAddress( ).equals("/change") && m.getTypetag().equals("fff")) {
+  //  /* transfer receivd values to local variables */
+  //  x0 = m.floatValue(0);
+  //  y0 = m.floatValue(1);
+  //  r0 = m.floatValue(2);
+  //}
+  //println();
+  
+  OscArgument arg = m.get(0);
+  int imageNumber = arg.intValue();
+  PVector p1 = new PVector();
+  p1.x = arg.floatValue();
+  p1.y = arg.floatValue();
+  
+  PVector p2 = new PVector();
+  p2.x = arg.floatValue();
+  p2.y = arg.floatValue();
+  
+  PVector p3 = new PVector();
+  p3.x = arg.floatValue();
+  p3.y = arg.floatValue();
+  
+  PVector p4 = new PVector();
+  p4.x = arg.floatValue();
+  p4.y = arg.floatValue();
+  
+  
+  // FAIRE QUELQUE CHOSE ICI
+}
+
 Random rand;
 
 //0 = normal
@@ -18,7 +59,8 @@ Random rand;
 
 
 void setup () {
-  size (800, 800);
+  //size (800, 800);
+  fullScreen();
   smooth();
 
   bouncers = new ArrayList();
@@ -41,6 +83,10 @@ void setup () {
   //setGradientArea(0, 0, width, height, #FD518E, #F7841C, 100);
 
   frameRate (30);
+  
+   osc = new OscP5( this , 12000 );
+  receiver = new NetAddress( "127.0.0.1" , 12000 );
+
 }
 
 
@@ -56,7 +102,9 @@ void draw () {
   
   vt.display();
   vt.mouseDragged();
-
+  int rando = rand.nextInt(100);
+  print(rando);
+  if (rando%100 == 0) switchMode(rand.nextInt(7));
   while (i < bouncers.size () ) {
       if (mode == 0) //normal moving pattern
       {
